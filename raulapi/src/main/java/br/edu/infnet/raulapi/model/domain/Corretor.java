@@ -6,7 +6,7 @@ public double salario;
 public int qtdVendas;
 
 private double calcularComissao() {
-	return qtdVendas * 2000;
+	return qtdVendas * 500;
 	
 }
 
@@ -17,7 +17,7 @@ public void exibirInformacoes() {
 	System.out.println("Quantidade de Vendas: " + qtdVendas);
 	System.out.println("Valor de Comissão: R$" + comissao);
 	System.out.println("Valor Total: R$" + (comissao + salario));
-	System.out.println("O corretor " + nome + " foi cadastrado com sucesso!!!");
+	System.out.println("");
 	}
 }
 

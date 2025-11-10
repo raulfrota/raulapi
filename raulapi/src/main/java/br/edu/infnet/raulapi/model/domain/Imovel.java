@@ -20,7 +20,6 @@ public void exibirInformacoes() {
 	System.out.println("Tamanho do Imóvel: " + metragem + "m²");
 	System.out.println("Valor de Venda: R$" + valorVenda);
 	System.out.println("Valor gerado de comissão: R$ " + comissao);
-	System.out.println("O Imóvel " + codigo + " foi cadastrado com sucesso!!!");
 	}
 	
 }
