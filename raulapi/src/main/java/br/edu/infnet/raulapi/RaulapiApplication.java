@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import br.edu.infnet.raulapi.model.domain.Imovel;
-import br.edu.infnet.raulapi.model.domain.Corretor;
+import br.edu.infnet.raulapi.model.domain.*;
 
 @SpringBootApplication
 public class RaulapiApplication {
@@ -79,6 +78,23 @@ public class RaulapiApplication {
 
 					System.out.print("Valor de venda: ");
 					imovel.valorVenda = in.nextDouble();
+					
+					System.out.println("Tipo do imóvel:");
+					System.out.println("1 - Casa");
+					System.out.println("2 - Apartamento");
+					System.out.println("3 - Terreno");
+					System.out.println("4 - Comercial");
+					System.out.print("Opção: ");
+					int tipoOpcao = in.nextInt();
+					in.nextLine();
+
+					switch (tipoOpcao) {
+						case 1 -> imovel.setTipo(TipoImovel.CASA);
+						case 2 -> imovel.setTipo(TipoImovel.APARTAMENTO);
+						case 3 -> imovel.setTipo(TipoImovel.TERRENO);
+						case 4 -> imovel.setTipo(TipoImovel.GALPAO);
+						default -> imovel.setTipo(TipoImovel.CASA);
+					}
 
 					System.out.print("Disponível para venda (true/false): ");
 					imovel.disponivel = in.nextBoolean();
