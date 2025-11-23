@@ -83,7 +83,7 @@ public class RaulapiApplication {
 					System.out.println("1 - Casa");
 					System.out.println("2 - Apartamento");
 					System.out.println("3 - Terreno");
-					System.out.println("4 - Comercial");
+					System.out.println("4 - Galpão");
 					System.out.print("Opção: ");
 					int tipoOpcao = in.nextInt();
 					in.nextLine();
