@@ -1,2 +1,4 @@
 01;Avenida Mario Ypiranga;120;250000.0;CASA
 01;Avenida Mario Ypiranga;120;250000.0;CASA
+IMV001;Avenida Mario Ypiranga, 100;250;500000.0;CASA
+IMV002;Avenida Brasil, 1101;500;900000.0;GALPAO

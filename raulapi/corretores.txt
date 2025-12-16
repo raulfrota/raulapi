@@ -1,2 +1,4 @@
 Raul;3000.0
 Raul;3000.0
+Raul Frota;3500.0
+Elberth Moraes;4300.0

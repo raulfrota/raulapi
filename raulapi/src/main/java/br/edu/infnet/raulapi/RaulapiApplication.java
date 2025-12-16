@@ -18,32 +18,76 @@ public class RaulapiApplication {
 	
 		List<Corretor> corretores = new ArrayList<>();
         List<Imovel> imoveis = new ArrayList<>();
-
-        Persistencia persistencia = new ArquivoService(corretores, imoveis);
+        List<Venda> vendas = new ArrayList<>();
+        
+        ArquivoService arquivoService = new ArquivoService(corretores, imoveis);
 
         try {
-            persistencia.carregar();
-            System.out.println("Dados carregados com sucesso.");
+            arquivoService.carregar();
+            System.out.println("Dados carregados dos arquivos.\n");
         } catch (IOException e) {
-            System.out.println("Erro ao carregar dados.");
+            System.out.println("Não foi possível carregar arquivos.");
         }
 
-        System.out.println("\nSISTEMA DE GESTÃO IMOBILIÁRIA\n");
+        Corretor corretor1 = new Corretor("Raul Frota", 3500);
+        Corretor corretor2 = new Corretor("Elberth Moraes", 4300);
 
-        Corretor c1 = new Corretor("Raul", 3000);
-        corretores.add(c1);
+        corretores.add(corretor1);
+        corretores.add(corretor2);
 
-        Imovel i1 = new Imovel("01", "Avenida Mario Ypiranga", 120, 250000, TipoImovel.CASA);
-        imoveis.add(i1);
+           Imovel imovel1 = new Imovel(
+                "IMV001",
+                "Avenida Mario Ypiranga, 100",
+                250,
+                500000,
+                TipoImovel.CASA
+        );
 
-        Venda v1 = new Venda(c1, i1, 250000);
-        System.out.println(v1);
+        Imovel imovel2 = new Imovel(
+                "IMV002",
+                "Avenida Brasil, 1101",
+                500,
+                900000,
+                TipoImovel.GALPAO
+        );
+
+        imoveis.add(imovel1);
+        imoveis.add(imovel2);
+   
+        try {
+            Venda venda1 = new Venda(corretor1, imovel1, imovel1.getValorVenda());
+            vendas.add(venda1);
+
+            Venda venda2 = new Venda(corretor2, imovel2, imovel2.getValorVenda());
+            vendas.add(venda2);
+
+        } catch (Exception e) {
+            System.out.println("Erro ao registrar venda: " + e.getMessage());
+        }
+
+        System.out.println("\nCORRETORES");
+        for (Corretor c : corretores) {
+            c.exibirInformacoes();
+            System.out.println();
+        }
+
+        System.out.println("\nIMÓVEIS");
+        for (Imovel i : imoveis) {
+            i.exibirInformacoes();
+            System.out.println("Disponível: " + i.isDisponivel());
+            System.out.println();
+        }
+
+        System.out.println("\nVENDAS");
+        for (Venda v : vendas) {
+            System.out.println(v);
+        }
 
         try {
-            persistencia.salvar();
+            arquivoService.salvar();
             System.out.println("\nDados salvos com sucesso.");
         } catch (IOException e) {
-            System.out.println("Erro ao salvar dados.");
+            System.out.println("Erro ao salvar arquivos.");
         }
     }
 }

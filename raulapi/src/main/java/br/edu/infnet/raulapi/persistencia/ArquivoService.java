@@ -1,4 +1,5 @@
 package br.edu.infnet.raulapi.persistencia;
+
 import br.edu.infnet.raulapi.model.domain.Corretor;
 import br.edu.infnet.raulapi.model.domain.Imovel;
 import br.edu.infnet.raulapi.model.domain.TipoImovel;
