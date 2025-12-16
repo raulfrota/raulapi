@@ -1,1 +1,2 @@
 01;Avenida Mario Ypiranga;120;250000.0;CASA
+01;Avenida Mario Ypiranga;120;250000.0;CASA
