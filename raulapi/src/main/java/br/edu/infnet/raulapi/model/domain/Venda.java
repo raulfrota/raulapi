@@ -9,31 +9,31 @@ package br.edu.infnet.raulapi.model.domain;
 	    private double valorFinal;
 	    private LocalDate data;
 
-	    public Venda() {
-	        this.data = LocalDate.now();
-	    }
-
 	    public Venda(Corretor corretor, Imovel imovel, double valorFinal) {
-	        this();
+
+	        if (!imovel.isDisponivel()) {
+	            throw new IllegalStateException("Imóvel indisponível.");
+	        }
+
+	        if (valorFinal <= 0) {
+	            throw new IllegalArgumentException("Valor final inválido.");
+	        }
+
 	        this.corretor = corretor;
 	        this.imovel = imovel;
 	        this.valorFinal = valorFinal;
-	    }
+	        this.data = LocalDate.now();
 
-	    public Corretor getCorretor() {
-	        return corretor;
-	    }
-
-	    public Imovel getImovel() {
-	        return imovel;
+	        imovel.vender();
+	        corretor.adicionarVenda(this);
 	    }
 
 	    public double getValorFinal() {
 	        return valorFinal;
 	    }
 
-	    public LocalDate getData() {
-	        return data;
+	    public double getComissao() {
+	        return valorFinal * Imovel.TAXA_COMISSAO;
 	    }
 
 	    @Override
@@ -42,6 +42,7 @@ package br.edu.infnet.raulapi.model.domain;
 	                "corretor=" + corretor.getNome() +
 	                ", imovel=" + imovel.getCodigo() +
 	                ", valorFinal=" + valorFinal +
+	                ", comissao=" + getComissao() +
 	                ", data=" + data +
 	                '}';
 	    }

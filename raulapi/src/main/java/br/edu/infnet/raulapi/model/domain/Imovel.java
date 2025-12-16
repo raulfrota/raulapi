@@ -1,23 +1,28 @@
 package br.edu.infnet.raulapi.model.domain;
 
 public class Imovel {
-	public String codigo;
-	public String endereco;
-	public int metragem;
-	public double valorVenda;
-	public boolean disponivel;
-	public TipoImovel tipo;
+	private String codigo;
+	private String endereco;
+	private int metragem;
+	private double valorVenda;
+	private boolean disponivel;
+	private TipoImovel tipo;
+	
+	 public static final double TAXA_COMISSAO = 0.06;
 	
 	 public Imovel() {
 	    }
 
-	    public Imovel(String codigo, String endereco, int metragem, double valorVenda, boolean disponivel, TipoImovel tipo) {
-	        this.codigo = codigo;
+	    public Imovel(String codigo, String endereco, int metragem, double valorVenda, TipoImovel tipo) {
+	    	if (valorVenda <= 0) {
+	            throw new IllegalArgumentException("Valor do imóvel inválido.");
+	        }
+            this.codigo = codigo;
 	        this.endereco = endereco;
 	        this.metragem = metragem;
 	        this.valorVenda = valorVenda;
-	        this.disponivel = disponivel;
 	        this.tipo = tipo;
+	        this.disponivel = true;
 	    }
 
 	    public String getCodigo() { return codigo; }
@@ -40,9 +45,15 @@ public class Imovel {
 
 	
 
-private double calcularComissao() {
-	return valorVenda * 0.06;
-	
+public double calcularComissao() {
+	return valorVenda * TAXA_COMISSAO;	
+}
+
+public void vender() {
+    if (!disponivel) {
+        throw new IllegalStateException("Imóvel já vendido.");
+    }
+    this.disponivel = false;
 }
 
 public void exibirInformacoes() {
@@ -53,17 +64,4 @@ public void exibirInformacoes() {
 	System.out.println("Valor de Venda: R$" + valorVenda);
 	System.out.println("Valor gerado de comissão: R$ " + comissao);
 	}
-
-@Override
-public String toString() {
-    return "Imovel{" +
-            "codigo='" + codigo + '\'' +
-            ", endereco='" + endereco + '\'' +
-            ", metragem=" + metragem +
-            ", valorVenda=" + valorVenda +
-            ", disponivel=" + disponivel +
-            ", tipo=" + tipo +
-            '}';
-}
-	
 }

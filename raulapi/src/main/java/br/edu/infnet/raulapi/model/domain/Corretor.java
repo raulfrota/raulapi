@@ -3,18 +3,18 @@ package br.edu.infnet.raulapi.model.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Corretor {
-public String nome;
-public double salario;
-public int qtdVendas;
-public List<Venda> vendas = new ArrayList<>();
+public class Corretor extends Pessoa {
 
-public Corretor() {
-}
+private double salario;
+private List<Venda> vendas;
 
 public Corretor(String nome, double salario) {
-    this.nome = nome;
+    super(nome);
+    if (salario <= 0) {
+        throw new IllegalArgumentException("Salário deve ser maior que zero.");
+    }
     this.salario = salario;
+    this.vendas = new ArrayList<>();
 }
 
 public String getNome() {
@@ -22,6 +22,9 @@ public String getNome() {
 }
 
 public void setNome(String nome) {
+	   if (nome == null || nome.isEmpty()) {
+	        throw new IllegalArgumentException("Nome do corretor não pode ser vazio.");
+	    }
     this.nome = nome;
 }
 
@@ -33,52 +36,24 @@ public void setSalario(double salario) {
     this.salario = salario;
 }
 
-public int getQtdVendas() {
-    return qtdVendas;
-}
-
-public void setQtdVendas(int qtdVendas) {
-    this.qtdVendas = qtdVendas;
-}
 
 public List<Venda> getVendas() {
     return vendas;
 }
 
-private double calcularComissao() {
-	return qtdVendas * 500;
-	
-}
-
-public void exibirInformacoes() {
-	double comissao = calcularComissao();
-	System.out.println("Nome do Corretor: " + nome);
-	System.out.println("Salário do Corretor: R$ " + salario);
-	System.out.println("Quantidade de Vendas: " + qtdVendas);
-	System.out.println("Valor de Comissão: R$" + comissao);
-	System.out.println("Valor Total: R$" + (comissao + salario));
-	System.out.println("");
-	}
 
 public void adicionarVenda(Venda venda) {
-    vendas.add(venda);
-    this.qtdVendas++;
-}
-
-public void adicionarVenda(Imovel imovel, double valorFinal) {
-    vendas.add(new Venda(this, imovel, valorFinal));
-    this.qtdVendas++;
-}
+	  if (venda == null) {
+          throw new IllegalArgumentException("Venda inválida.");
+      }
+      vendas.add(venda);
+  }
 
 @Override
-public String toString() {
-    return "Corretor{" +
-            "nome='" + nome + '\'' +
-            ", salario=" + salario +
-            ", qtdVendas=" + qtdVendas +
-            ", vendasRegistradas=" + vendas.size() +
-            '}';
+public void exibirInformacoes() {
+    System.out.println("Corretor: " + nome);
+    System.out.println("Salário fixo: R$ " + salario);
+    System.out.println("Total de vendas: " + vendas.size());
 }
-
 }
 
