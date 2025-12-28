@@ -10,10 +10,7 @@ private List<Venda> vendas;
 
 public Corretor(String nome, double salario) {
     super(nome);
-    if (salario <= 0) {
-        throw new IllegalArgumentException("Salário deve ser maior que zero.");
-    }
-    this.salario = salario;
+    setSalario(salario);
     this.vendas = new ArrayList<>();
 }
 
@@ -33,6 +30,9 @@ public double getSalario() {
 }
 
 public void setSalario(double salario) {
+	if (salario <= 0) {
+        throw new IllegalArgumentException("Salário deve ser maior que zero.");
+    }
     this.salario = salario;
 }
 

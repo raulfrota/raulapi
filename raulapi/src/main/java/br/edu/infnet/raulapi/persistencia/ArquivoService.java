@@ -41,8 +41,10 @@ public final class ArquivoService implements Persistencia {
 
 	    @Override
 	    public void carregar() throws IOException {
+	    	 corretores.clear();
+	         imoveis.clear();
 
-	        File f1 = new File(ARQ_CORRETORES);
+	         File f1 = new File(ARQ_CORRETORES);
 	        if (f1.exists()) {
 	            try (BufferedReader br = new BufferedReader(new FileReader(f1))) {
 	                String linha;

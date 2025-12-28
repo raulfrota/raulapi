@@ -20,22 +20,26 @@ public class RaulapiApplication {
         List<Imovel> imoveis = new ArrayList<>();
         List<Venda> vendas = new ArrayList<>();
         
-        ArquivoService arquivoService = new ArquivoService(corretores, imoveis);
-
-        try {
-            arquivoService.carregar();
+        Persistencia persistencia = new ArquivoService(corretores, imoveis);
+        
+         try { 
+            persistencia.carregar();
             System.out.println("Dados carregados dos arquivos.\n");
         } catch (IOException e) {
             System.out.println("Não foi possível carregar arquivos.");
+        } finally { 
+            System.out.println("Finalizando carregamento.\n");
         }
 
         Corretor corretor1 = new Corretor("Raul Frota", 3500);
         Corretor corretor2 = new Corretor("Elberth Moraes", 4300);
+        Pessoa pessoa1 = new Corretor("Rodrigo Almeida", 4000);
 
         corretores.add(corretor1);
         corretores.add(corretor2);
-
-           Imovel imovel1 = new Imovel(
+        corretores.add((Corretor)pessoa1);
+        
+        Imovel imovel1 = new Imovel(
                 "IMV001",
                 "Avenida Mario Ypiranga, 100",
                 250,
@@ -84,7 +88,7 @@ public class RaulapiApplication {
         }
 
         try {
-            arquivoService.salvar();
+            persistencia.salvar();
             System.out.println("\nDados salvos com sucesso.");
         } catch (IOException e) {
             System.out.println("Erro ao salvar arquivos.");

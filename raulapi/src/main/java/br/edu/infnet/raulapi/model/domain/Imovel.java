@@ -14,9 +14,7 @@ public class Imovel {
 	    }
 
 	    public Imovel(String codigo, String endereco, int metragem, double valorVenda, TipoImovel tipo) {
-	    	if (valorVenda <= 0) {
-	            throw new IllegalArgumentException("Valor do imóvel inválido.");
-	        }
+	    	setValorVenda(valorVenda);
             this.codigo = codigo;
 	        this.endereco = endereco;
 	        this.metragem = metragem;
@@ -35,7 +33,11 @@ public class Imovel {
 	    public void setMetragem(int metragem) { this.metragem = metragem; }
 
 	    public double getValorVenda() { return valorVenda; }
-	    public void setValorVenda(double valorVenda) { this.valorVenda = valorVenda; }
+	    public void setValorVenda(double valorVenda) { 
+	    	if (valorVenda <= 0) {
+	            throw new IllegalArgumentException("Valor do imóvel inválido.");
+	        }
+	    	this.valorVenda = valorVenda; }
 
 	    public boolean isDisponivel() { return disponivel; }
 	    public void setDisponivel(boolean disponivel) { this.disponivel = disponivel; }
